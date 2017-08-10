@@ -1,0 +1,17 @@
+{
+  "name": "butcher-burger",
+  "version": "1.0.0",
+  "description": "Admin panel for managing categories and items",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --hot"
+  },
+  "author": "Ali Ismael",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "webpack": "^3.5.3",
+    "webpack-dev-server": "^2.7.1"
+  }
+}
