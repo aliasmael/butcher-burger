@@ -1,5 +1,7 @@
-const jsonfile = require('jsonfile') // nodejs lib for easily reading and writing to json files
-var db = 'db.json'; // dummy database file
+var JsonDB = require('node-json-db');
+var db = new JsonDB("db", true, false);
+
+var Category = require('./../models/Category')
 
 // Category repository is responsible for acting with database
 var CategoryRepository = {
@@ -8,8 +10,8 @@ var CategoryRepository = {
     getAllCategories: function () {
 
         try {
-            var result = jsonfile.readFileSync(db);
-            return { error: false, categories: result.categories };               
+            var result = db.getData("/categories");;
+            return { error: false, categories: result };               
         } catch (error) {
             return { error: true, message: error };
         }
@@ -18,9 +20,11 @@ var CategoryRepository = {
     },
 
     // get all categories from db.json file
-    addNewCategory: function (name, description) {
-        // TO-Do
-        return false;
+    addNewCategory: function (category) {
+        category.id = category.guid();
+        db.push("/categories", category.getAsJson(), false);
+
+        return true;
     }
 }
 
