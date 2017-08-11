@@ -10,10 +10,10 @@ class CategoriesList extends React.Component {
     }
 
     componentDidMount() {
-        this.CategoriesList();
+        this.categoriesList();
     }
 
-    CategoriesList(){
+    categoriesList(){
 
         return $.getJSON('http://localhost:3000/api/category/get-all-categories')
         .then((data) => {
