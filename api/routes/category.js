@@ -1,22 +1,25 @@
 const express = require('express')  
 var category = express.Router();
 
-const jsonfile = require('jsonfile') // nodejs lib for easily reading and writing to json files
-var db = 'db.json'; // dummy database file
-
 // use cors to allow host
 var cors = require('cors')
 category.use(cors())
 
+// use CategoryRepository for accessing database
+const CategoryRepository = require('./../database-repository/CategoryRepository');
+var categoryRepository = CategoryRepository.CategoryRepository;
+
 category.get('/get-all-categories', function(req, res, next) {
     
-    // read categories data from db.json file
-    jsonfile.readFile(db, function(err, obj) {
-        res.json({
-            err: err,
-            data: obj
-        });
-    });
+    // read categories data CategoryRepository
+    res.json( categoryRepository.getAllCategories() );
+
+});
+
+category.post('/add', function(req, res, next) {
+    
+    // Add new category
+    res.json( categoryRepository.addNewCategory(req.categoryName, req.categoryDescription) );
 
 });
 
