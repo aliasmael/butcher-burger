@@ -18,6 +18,13 @@ var CategoryItem = {
         });
     },
 
+    // Add new category item
+    delete: function ( callback ) {
+        categoryRepository.deleteItem( this, function (result) {
+            callback(result);
+        });
+    },
+
 
     // get parse item to json
     getAsJson: function () {

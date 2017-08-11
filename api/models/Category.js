@@ -10,22 +10,28 @@ var Category = {
     description: '',
     items: [],
     
-    // get all categories from db.json file
+    // get all categories
     getAllCategories: function ( callback ) {
         categoryRepository.getAllCategories(function (res) {
             callback(res);
         });
     },
 
-    // get all categories from db.json file
+    // add new categories
     save: function ( callback ) {
         categoryRepository.addNewCategory( this, function (result) {
             callback(result);
         });
     },
 
+    // delete category
+    delete: function ( callback ) {
+        categoryRepository.deleteCategory( this.id, function (result) {
+            callback(result);
+        });
+    },
 
-    // get all categories from db.json file
+    // get all categories
     getAsJson: function () {
         return { id: this.id, name: this.name, description: this.description, items: this.items };
     },

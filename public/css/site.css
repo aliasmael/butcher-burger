@@ -30,3 +30,5 @@ body { background-color: #ecf0f5; }
 
 .no-category { height: 50px; padding: 15px; color: orangered; }
 .no-category.hidden { height: 100px; display: none; }
+
+.title { height: 50px }

@@ -3,17 +3,45 @@ import AddItem from './AddItem.jsx';
 import CategoryItem from './CategoryItem.jsx';
 
 class CategoryView extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {isActive: props.active, category: props.category};
-  }
+    constructor(props) {
+        super(props);
+        this.state = {isActive: props.active, category: props.category};
+        this.deleteCategory = this.deleteCategory.bind(this);
+    }
+
+    addNewItem (item) {
+        var newCategoryData = this.state.category.items.push(category);
+        this.setState( {category: newCategoryData} );
+    }
+
+    deleteCategory (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var data = { categoryId: this.state.category.id }
+        
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:3000/api/category/delete',
+            data: data
+        }).done(function(data) {
+            console.log('deleted');                
+        })
+        .fail(function(jqXhr) {
+            console.log('failed to connect');
+        });
+    }
   
-  render() {
-      return (
+    render() {
+        return (
             <div className="category-view">
                 <div className= {this.state.isActive == "true" ?  "active title" : "title"}>
                     <i className="align justify icon"></i>
                     {this.state.category.name}
+                    <div className="action-buttons">
+                        <button className="ui red button right floated" onClick={this.deleteCategory}>Delete</button>
+                        <button className="ui orange button right floated">Edit</button>
+                    </div>
                 </div>
                 <div className={this.state.isActive == "true" ?  "active content" : "content"}>
 
@@ -41,7 +69,7 @@ class CategoryView extends React.Component {
                             {/* View category_items  */}
                             {
                                 this.state.category.items.map((item, index) => (
-                                    <CategoryItem key={item.id} item={item} />
+                                    <CategoryItem key={item.id} item={item} addNewItem={this.addNewItem} />
                                 ))
                             }
 
@@ -52,8 +80,8 @@ class CategoryView extends React.Component {
                     </div>
                 </div>
             </div>
-      );
-   }
+        );
+    }
 }
 
 export default CategoryView;
