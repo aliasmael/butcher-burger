@@ -4,6 +4,25 @@ class CategoryItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {item: props.item};
+        this.deleteItem = this.deleteItem.bind(this);
+    }
+
+    deleteItem (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var data = this.state.item
+        
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:3000/api/category/delete-item',
+            data: data
+        }).done(function(data) {
+            console.log('deleted');                
+        })
+        .fail(function(jqXhr) {
+            console.log('failed to connect');
+        });
     }
 
     render() {
@@ -15,7 +34,7 @@ class CategoryItem extends React.Component {
                     <span className="price">( {this.state.item.price} )</span>
 
                     <div className="action-buttons">
-                        <button className="ui red button right floated">Delete</button>
+                        <button className="ui red button right floated" onClick={this.deleteItem}>Delete</button>
                         <button className="ui orange button right floated">Edit</button>
                     </div>
                 </div>

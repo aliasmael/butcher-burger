@@ -3,8 +3,8 @@ import React from 'react';
 class AddItem extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { name: '', description: '', price: '', categoryId: props.categoryId };
-        this.addNewCategory = this.addNewCategory.bind(this);
+        this.state = { name: '', description: '', price: '', categoryId: props.categoryId, addNewItem: props.addNewItem };
+        this.addNewItem = this.addNewItem.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
         this.handlePriceChange = this.handlePriceChange.bind(this);
@@ -17,7 +17,7 @@ class AddItem extends React.Component {
         return false;
     }
 
-    addNewCategory (e) {
+    addNewItem (e) {
         e.preventDefault();
         var that = this;
 
@@ -30,6 +30,7 @@ class AddItem extends React.Component {
                 data: data
             }).done(function(data) {
                 that.setState({ name: '', description: '', price: '' } );
+                that.state.addNewItem(data);
             })
             .fail(function(jqXhr) {
                 console.log('failed to connect');
@@ -66,7 +67,7 @@ class AddItem extends React.Component {
                             <textarea placeholder="English Description" type="text" rows="1"  value={this.state.description} onChange={this.handleDescriptionChange} />
                         </div>
                         <div className="field">
-                            <div className="ui positive submit button" type="submit" onClick={this.addNewCategory}>Create</div>
+                            <div className="ui positive submit button" type="submit" onClick={this.addNewItem}>Create</div>
                         </div>
                     </div>
                 </form>

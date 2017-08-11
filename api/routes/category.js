@@ -45,4 +45,32 @@ category.post('/add-item', function(req, res, next) {
 
 });
 
+// Delete category_item
+category.post('/delete-item', function(req, res, next) {
+    
+    // Delete category_item
+    var item = CategoryItemModel.CategoryItem;
+    item.name = req.body.itemName;
+    item.description = req.body.itemDescription;
+    item.price = req.body.itemPrice;
+    item.categoryId = req.body.categoryId;
+    item.delete( function (result) {
+        res.json( result );
+    }) 
+
+});
+
+// Delete category
+category.post('/delete', function(req, res, next) {
+    
+    // Add new category
+    var category = CategoryModel.Category;
+    category.id = req.body.categoryId;
+
+    category.delete( function (result) {
+        res.json( result );
+    }) 
+
+});
+
 module.exports.category = category;
