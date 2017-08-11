@@ -9,6 +9,8 @@ body { background-color: #ecf0f5; }
 .ui.styled.accordion .category-view .title { background-color: #a9f3d3; color: black; border: 1px solid #73bda2;}
 .ui.styled.accordion .category-view .active.title { background-color: #a9f3d3; }
 .ui.styled.accordion .category-view .title:hover { background-color: #a9f3d3; }
+.ui.styled.accordion .category-view .category-details { width: fit-content; }
+
 
 .add-item-form { margin-top: 15px }
 
