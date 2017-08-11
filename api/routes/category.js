@@ -5,21 +5,24 @@ var category = express.Router();
 var cors = require('cors')
 category.use(cors())
 
-// use CategoryRepository for accessing database
-const CategoryRepository = require('./../database-repository/CategoryRepository');
-var categoryRepository = CategoryRepository.CategoryRepository;
+var CategoryModel = require('./../models/Category')
+
 
 category.get('/get-all-categories', function(req, res, next) {
     
-    // read categories data CategoryRepository
-    res.json( categoryRepository.getAllCategories() );
+    var category = CategoryModel.Category;
+    res.json( category.getAllCategories() );        
 
 });
 
 category.post('/add', function(req, res, next) {
     
     // Add new category
-    res.json( categoryRepository.addNewCategory(req.categoryName, req.categoryDescription) );
+    var category = CategoryModel.Category;
+    category.name = req.body.categoryName;
+    category.description = req.body.categoryDescription;
+    var saved = category.save() 
+    res.json( { saved: saved } );
 
 });
 
