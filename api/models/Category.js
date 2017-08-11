@@ -32,6 +32,10 @@ var Category = {
 
     guid: function () {
         return (new Date()).getTime();
+    },
+
+    addItem: function (item) {
+        this.items.push(item);
     }
 }
 

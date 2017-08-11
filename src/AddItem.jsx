@@ -3,7 +3,7 @@ import React from 'react';
 class AddItem extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { name: '', description: '', price: '' };
+        this.state = { name: '', description: '', price: '', categoryId: props.categoryId };
         this.addNewCategory = this.addNewCategory.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
@@ -19,16 +19,17 @@ class AddItem extends React.Component {
 
     addNewCategory (e) {
         e.preventDefault();
+        var that = this;
 
         if ( this.vaildateForm() ) {
-            var data = { itemName: this.state.name, itemDescription: this.state.description }
+            var data = { itemName: this.state.name, itemDescription: this.state.description, itemPrice: this.state.price, categoryId: this.state.categoryId }
             
             $.ajax({
                 type: 'POST',
                 url: 'http://localhost:3000/api/category/add-item',
                 data: data
             }).done(function(data) {
-                this.setState({ name: '', description: '', price: '' } );
+                that.setState({ name: '', description: '', price: '' } );
             })
             .fail(function(jqXhr) {
                 console.log('failed to connect');
