@@ -11,19 +11,23 @@ var Category = {
     items: [],
     
     // get all categories from db.json file
-    getAllCategories: function () {
-        return categoryRepository.getAllCategories();
+    getAllCategories: function ( callback ) {
+        categoryRepository.getAllCategories(function (res) {
+            callback(res);
+        });
     },
 
     // get all categories from db.json file
-    save: function () {
-        return categoryRepository.addNewCategory( this );
+    save: function ( callback ) {
+        categoryRepository.addNewCategory( this, function (result) {
+            callback(result);
+        });
     },
 
 
     // get all categories from db.json file
     getAsJson: function () {
-        return [{ id: this.id, name: this.name, description: this.description, items: this.items }]
+        return { id: this.id, name: this.name, description: this.description, items: this.items };
     },
 
     guid: function () {
