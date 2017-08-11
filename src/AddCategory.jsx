@@ -19,6 +19,7 @@ class AddCategory extends React.Component {
 
     addNewCategory (e) {
         e.preventDefault();
+        var that = this;
 
         if ( this.vaildateForm() ) {
             var data = { categoryName: this.state.name, categoryDescription: this.state.description }
@@ -28,7 +29,7 @@ class AddCategory extends React.Component {
                 url: 'http://localhost:3000/api/category/add',
                 data: data
             }).done(function(data) {
-                this.setState({ name: '', description: '' } );
+                that.setState({ name: '', description: '' } );
             })
             .fail(function(jqXhr) {
                 console.log('failed to connect');
