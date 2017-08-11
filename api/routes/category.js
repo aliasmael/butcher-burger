@@ -11,7 +11,9 @@ var CategoryItemModel = require('./../models/CategoryItem'); // CategoryItem Mod
 // getting all categories
 category.get('/get-all-categories', function(req, res, next) {
     var category = CategoryModel.Category;
-    res.json( category.getAllCategories() );
+    category.getAllCategories( function (result) {
+        res.json( result );
+    });
 });
 
 // Add new category
@@ -21,8 +23,10 @@ category.post('/add', function(req, res, next) {
     var category = CategoryModel.Category;
     category.name = req.body.categoryName;
     category.description = req.body.categoryDescription;
-    var saved = category.save() 
-    res.json( { saved: saved } );
+    
+    category.save( function(result) {
+        res.json( result );
+    }) 
 
 });
 
