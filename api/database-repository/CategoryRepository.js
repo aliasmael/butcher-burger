@@ -19,10 +19,19 @@ var CategoryRepository = {
 
     },
 
-    // get all categories from db.json file
+    // Add new category to db.json file
     addNewCategory: function (category) {
         category.id = category.guid();
         db.push("/categories", category.getAsJson(), false);
+
+        return true;
+    },
+
+    // add new category_item to db.json file
+    addNewItem: function (item) {
+        categoryId = item.categoryId;
+        item.id = category.guid();
+        db.push("/categories/", item.getAsJson(), false);
 
         return true;
     }
