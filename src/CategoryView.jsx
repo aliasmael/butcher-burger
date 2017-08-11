@@ -36,7 +36,7 @@ class CategoryView extends React.Component {
                             <div className="one wide column">Items</div>
 
                             {/* Add new category_item  */}
-                            <AddItem />
+                            <AddItem categoryId={this.state.category.id} />
 
                             {/* View category_items  */}
                             {

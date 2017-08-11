@@ -38,8 +38,10 @@ category.post('/add-item', function(req, res, next) {
     item.name = req.body.itemName;
     item.description = req.body.itemDescription;
     item.price = req.body.itemPrice;
-    var saved = item.save() 
-    res.json( { saved: saved } );
+    item.categoryId = req.body.categoryId;
+    item.save( function (result) {
+        res.json( result );
+    }) 
 
 });
 

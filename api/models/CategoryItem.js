@@ -12,8 +12,10 @@ var CategoryItem = {
     categoryId: '',
 
     // Add new category item
-    save: function () {
-        return categoryRepository.addNewCategory( this );
+    save: function ( callback ) {
+        categoryRepository.addNewItem( this, function (result) {
+            callback(result);
+        });
     },
 
 
