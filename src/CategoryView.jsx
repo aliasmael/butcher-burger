@@ -44,6 +44,10 @@ class CategoryView extends React.Component {
                                     <CategoryItem key={item.id} item={item} />
                                 ))
                             }
+
+                            <div className={ this.state.category.items.length > 0 ? "no-category hidden" : "no-category ui primary basic" }>
+                                No items added yet for this category!
+                            </div>
                         </div>
                     </div>
                 </div>
