@@ -5,7 +5,7 @@ import CategoryItem from './CategoryItem.jsx';
 class CategoryView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isActive: props.active};
+    this.state = {isActive: props.active, category: props.category};
   }
   
   render() {
@@ -13,29 +13,37 @@ class CategoryView extends React.Component {
             <div className="category-view">
                 <div className= {this.state.isActive == "true" ?  "active title" : "title"}>
                     <i className="align justify icon"></i>
-                    Breakfast
+                    {this.state.category.name}
                 </div>
                 <div className={this.state.isActive == "true" ?  "active content" : "content"}>
+
+                    {/* Category details name, description  */}
                     <div className="ui grid">
-                        <div className="two column">
+                        <div className="two column category-details">
                             <div className="one wide column">Name *</div>
-                            <div className="one wide column category-name">Breakfast</div>
+                            <div className="one wide column category-name">{this.state.category.name}</div>
                         </div>
 
-                        <div className="two column">
+                        <div className="two column  category-details">
                             <div className="one wide column">Description</div>
-                            <div className="one wide column category-description">Empty</div>
+                            <div className="one wide column category-description">{this.state.category.description}</div>
                         </div>
                     </div>
 
+                    {/* Category items  */}
                     <div className="ui grid">
                         <div className="eight column">
                             <div className="one wide column">Items</div>
+
+                            {/* Add new category_item  */}
                             <AddItem />
 
-                            <CategoryItem active="false"/>
-                            <CategoryItem active="false"/>
-                            <CategoryItem active="false"/>
+                            {/* View category_items  */}
+                            {
+                                this.state.category.items.map((item, index) => (
+                                    <CategoryItem key={item.id} item={item} />
+                                ))
+                            }
                         </div>
                     </div>
                 </div>
