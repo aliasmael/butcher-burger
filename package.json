@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "better-console": "^1.0.0",
+    "body-parser": "^1.17.2",
     "del": "^3.0.0",
     "extend": "^3.0.1",
     "gulp": "^3.9.1",
@@ -37,6 +38,7 @@
     "gulp-watch": "^4.3.11",
     "jsonfile": "^3.0.1",
     "map-stream": "0.0.7",
+    "node-json-db": "^0.7.3",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "require-dot-file": "^0.4.0",
