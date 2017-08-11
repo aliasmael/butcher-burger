@@ -9,6 +9,11 @@ app.use(cors())
 // use category routes under /api/category
 app.use('/api/category', require('./routes/category').category);
 
+// Handle error routes
+app.use(function(req, res){
+    res.sendStatus(404);
+});
+
 // start listing on port 3000
 app.listen(port, function() {
     console.log("API server running on port", port);
