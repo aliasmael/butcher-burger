@@ -1,0 +1,27 @@
+body { background-color: #ecf0f5; }
+
+.container{ width: 80%; margin: 0 auto; }
+
+.categories-list { background-color: #FFFFFF; }
+
+.ui.styled.accordion { width: 100%; }
+.ui.styled.accordion .category-view .content { margin-left: 20px; margin-right: 20px; background-color: #f5f5f5 }
+.ui.styled.accordion .category-view .title { background-color: #a9f3d3; color: black; border: 1px solid #73bda2;}
+.ui.styled.accordion .category-view .active.title { background-color: #a9f3d3; }
+.ui.styled.accordion .category-view .title:hover { background-color: #a9f3d3; }
+
+.add-item-form { margin-top: 15px }
+
+.category-name { color: #08c; border-bottom: 1px dashed #08c; width: fit-content; }
+.category-description { color: #ec4249; border-bottom: 1px dashed #08c; width: fit-content; }
+
+.category-view { margin-bottom: 5px; }
+
+.category-item { margin-bottom: 5px; }
+
+.ui.styled.accordion .category-item .title { background-color: #c8e9f3; height: 50px; border: 1px solid #9ebac2;}
+.ui.styled.accordion .category-item .title:hover { background-color: #c8e9f3; height: 50px; }
+
+.action-buttons { margin-top: -25px;}
+
+.category-item .price { margin-left: 5px; }
