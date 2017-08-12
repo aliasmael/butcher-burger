@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Grid, Popup } from 'semantic-ui-react';
+import { Header, Button, Grid, Popup } from 'semantic-ui-react';
 import EditItem from './EditItem.jsx';
 
 class CategoryItem extends React.Component {
@@ -41,8 +41,18 @@ class CategoryItem extends React.Component {
                 {
                     (this.state.user.role == "admin") ? 
                         <div className="action-buttons">
-                            <button className="ui red button right floated" onClick={this.deleteItem}>Delete</button>
-                            {/* Edit category popup  */}
+                            {/* Delete item popup  */}
+                            <Popup wide trigger={<Button type="button" className="ui red button right floated" content='Delete' />} on='click'>
+                                 <Grid centered divided columns={1}>
+                                    <Grid.Column>
+                                        <Header as='h4'> {this.state.item.name} </Header>
+                                        <p>Are you sure you want delete this item? </p>         
+                                        <button className="ui red button right floated" onClick={this.deleteItem}>Delete</button>
+                                    </Grid.Column>
+                                </Grid>
+                            </Popup>
+
+                            {/* Edit item popup  */}
                             <Popup wide trigger={<Button type="button" className="ui orange button right floated" content='Edit' />} on='click'>
                                 <EditItem category={this.state.category} item={this.state.item} onUpdate={this.onUpdate} />
                             </Popup>

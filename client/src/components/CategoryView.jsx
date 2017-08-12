@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Grid, Popup } from 'semantic-ui-react';
+import { Header,Button, Grid, Popup } from 'semantic-ui-react';
 import AddItem from './AddItem.jsx';
 import CategoryItem from './CategoryItem.jsx';
 import EditCategory from './EditCategory.jsx';
@@ -63,7 +63,22 @@ class CategoryView extends React.Component {
                 {
                     (this.state.user.role == "admin") ? 
                         <div className="action-buttons">
-                            <button className="ui red button right floated" onClick={this.deleteCategory}>Delete</button>
+                             {/* Delete category popup  */}
+                            <Popup wide trigger={<Button type="button" className="ui red button right floated" content='Delete' />} on='click'>
+                                 <Grid centered divided columns={1}>
+                                    <Grid.Column>
+                                        <Header as='h4'> {this.state.category.name} </Header>
+                                        <p>Are you sure you want delete this category? </p>
+                                        {
+                                            ( this.state.category.items.length > 0 ) ?
+                                                <b> Has { this.state.category.items.length } item{ (this.state.category.items.length > 1) ? 's' : '' }  .</b>
+                                                : ''
+                                        }                                        
+                                        <button className="ui red button right floated" onClick={this.deleteCategory}>Delete</button>
+                                    </Grid.Column>
+                                </Grid>
+                            </Popup>
+
 
                             {/* Edit category popup  */}
                             <Popup wide trigger={<Button type="button" className="ui orange button right floated" content='Edit' />} on='click'>
