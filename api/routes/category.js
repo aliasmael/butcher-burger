@@ -65,7 +65,7 @@ category.post('/delete', function(req, res, next) {
     
     // Add new category
     var category = CategoryModel.Category;
-    category.id = req.body.categoryId;
+    category._id = req.body.categoryId;
 
     category.delete( function (result) {
         res.json( result );
