@@ -5,7 +5,7 @@ import CategoryView from './CategoryView.jsx';
 class CategoriesList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { categories: [] };
+        this.state = { categories: [], user: props.user };
         this.onDelete = this.onDelete.bind(this);
         this.onAdd = this.onAdd.bind(this);
     }
@@ -43,8 +43,12 @@ class CategoriesList extends React.Component {
 
         return (
             <div>
-                {/* Add new category component  */}
-                <AddCategory onAdd={this.onAdd}/>
+
+                {/* Add new category component (Admin Only) */}
+                {
+                    (this.state.user.role == "admin") ? <AddCategory onAdd={this.onAdd}/> : ''
+                }
+                
 
                 <div className="ui blue segment">
                     <h4> Menu Data </h4>
@@ -53,7 +57,7 @@ class CategoriesList extends React.Component {
                         {
 
                             this.state.categories.map((item, index) => (
-                                <CategoryView active={(index == 0) ? "true" : "false"} key={item._id} category={item} onDelete={this.onDelete} />
+                                <CategoryView active={(index == 0) ? "true" : "false"} key={item._id} category={item} onDelete={this.onDelete} user={this.state.user} />
                             ))
                         }
 
