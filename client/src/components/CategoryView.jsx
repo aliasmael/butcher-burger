@@ -51,20 +51,21 @@ class CategoryView extends React.Component {
         var that = this;
         return (
             <div className="category-view">
+                {/* Show actions button (For Admins Only)  */}
+                {
+                    (this.state.user.role == "admin") ? 
+                        <div className="action-buttons">
+                            <button className="ui red button right floated" onClick={this.deleteCategory}>Delete</button>
+                            <button type="button" className="ui orange button right floated">Edit</button>
+                        </div> 
+                        : ''
+                }
                 <div className= {this.state.isActive == "true" ?  "active title" : "title"}>
                     <i className="align justify icon"></i>
                     {this.state.category.name}
-
-                    {/* Show actions button (For Admins Only)  */}
-                    {
-                        (this.state.user.role == "admin") ? 
-                            <div className="action-buttons">
-                                <button className="ui red button right floated" onClick={this.deleteCategory}>Delete</button>
-                                <button type="button" className="ui orange button right floated">Edit</button>
-                            </div> 
-                            : ''
-                    }
                 </div>
+
+
                 <div className={this.state.isActive == "true" ?  "active content" : "content"}>
 
                     {/* Category details name, description  */}
