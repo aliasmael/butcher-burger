@@ -50,7 +50,7 @@ class CategoryView extends React.Component {
         });
     }
 
-    // Updating view on item added
+    // Updating view on category updated
     onUpdate(category) {
         this.setState( {category: category} );
     }
@@ -106,7 +106,7 @@ class CategoryView extends React.Component {
                             {/* View category_items  */}
                             {
                                 this.state.category.items.map((item, index) => (
-                                    <CategoryItem key={item._id} item={item} onItemDeleted={this.onItemDeleted} user={that.state.user} />
+                                    <CategoryItem key={item._id} category={that.state.category} item={item} onItemDeleted={this.onItemDeleted} user={that.state.user} />
                                 ))
                             }
 
