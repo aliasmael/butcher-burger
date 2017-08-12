@@ -3,14 +3,12 @@ import React from 'react';
 class CategoryItem extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {item: props.item};
+        this.state = {item: props.item, onItemDeleted: props.onItemDeleted};
         this.deleteItem = this.deleteItem.bind(this);
     }
 
     deleteItem (e) {
-        e.preventDefault();
-        e.stopPropagation();
-
+        var that = this;
         var data = this.state.item
         
         $.ajax({
@@ -18,7 +16,7 @@ class CategoryItem extends React.Component {
             url: 'http://localhost:3000/api/category/delete-item',
             data: data
         }).done(function(data) {
-            console.log('deleted');                
+            that.state.onItemDeleted(that.state.item._id);
         })
         .fail(function(jqXhr) {
             console.log('failed to connect');

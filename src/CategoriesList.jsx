@@ -1,12 +1,13 @@
 import React from 'react';
+import AddCategory from './AddCategory.jsx';
 import CategoryView from './CategoryView.jsx';
 
 class CategoriesList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            categories: []
-        };
+        this.state = { categories: [] };
+        this.onDelete = this.onDelete.bind(this);
+        this.onAdd = this.onAdd.bind(this);
     }
 
     componentDidMount() {
@@ -23,25 +24,46 @@ class CategoriesList extends React.Component {
 
     }
 
+    // on entry deleted update view    
+    onDelete(categoryId) {
+        var newData = this.state.categories.filter( function(category){
+            return (categoryId != category._id)
+        });
+        this.setState( {categories: newData} );
+    }
+
+    // on entry added update view
+    onAdd(category) {
+        this.setState(prevState => ({
+            categories: prevState.categories.concat(category)
+        }));
+    }
+
     render() {
 
         return (
-            <div className="ui blue segment">
-                <h4> Menu Data </h4>
-                <div className="ui styled accordion">
-                    {/* Render All categories  */}
-                    {
+            <div>
+                {/* Add new category component  */}
+                <AddCategory onAdd={this.onAdd}/>
 
-                        this.state.categories.map((item, index) => (
-                            <CategoryView active={(index == 0) ? "true" : "false"} key={item.id} category={item} />
-                        ))
-                    }
+                <div className="ui blue segment">
+                    <h4> Menu Data </h4>
+                    <div className="ui styled accordion">
+                        {/* Render All categories  */}
+                        {
 
-                    <div className={ this.state.categories.length > 0 ? "no-category hidden" : "no-category ui primary basic" }>
-                        No categories added yet!
-                    </div>
+                            this.state.categories.map((item, index) => (
+                                console.log(item),
+                                <CategoryView active={(index == 0) ? "true" : "false"} key={item._id} category={item} onDelete={this.onDelete} />
+                            ))
+                        }
 
-                </div>  
+                        <div className={ this.state.categories.length > 0 ? "no-category hidden" : "no-category ui primary basic" }>
+                            No categories added yet!
+                        </div>
+
+                    </div>  
+                </div>
             </div>
         );
     }

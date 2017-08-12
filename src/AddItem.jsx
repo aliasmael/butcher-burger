@@ -3,7 +3,7 @@ import React from 'react';
 class AddItem extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { name: '', description: '', price: '', categoryId: props.categoryId, addNewItem: props.addNewItem };
+        this.state = { name: '', description: '', price: '', categoryId: props.categoryId, onItemAdded: props.onItemAdded };
         this.addNewItem = this.addNewItem.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
@@ -18,7 +18,6 @@ class AddItem extends React.Component {
     }
 
     addNewItem (e) {
-        e.preventDefault();
         var that = this;
 
         if ( this.vaildateForm() ) {
@@ -30,7 +29,7 @@ class AddItem extends React.Component {
                 data: data
             }).done(function(data) {
                 that.setState({ name: '', description: '', price: '' } );
-                that.state.addNewItem(data);
+                that.state.onItemAdded(data.item);
             })
             .fail(function(jqXhr) {
                 console.log('failed to connect');
