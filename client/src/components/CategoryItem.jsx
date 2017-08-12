@@ -18,7 +18,7 @@ class CategoryItem extends React.Component {
         var data = this.state.item
         
         $.ajax({
-            type: 'POST',
+            type: 'DELETE',
             url: 'http://localhost:3000/api/category/delete-item',
             data: data
         }).done(function(data) {

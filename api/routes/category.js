@@ -17,7 +17,7 @@ category.get('/get-all-categories', function(req, res, next) {
 });
 
 // Add new category
-category.post('/add', function(req, res, next) {
+category.put('/add', function(req, res, next) {
     
     // Add new category
     var category = CategoryModel.Category;
@@ -31,7 +31,7 @@ category.post('/add', function(req, res, next) {
 });
 
 // Add new category_item
-category.post('/add-item', function(req, res, next) {
+category.put('/add-item', function(req, res, next) {
     
     // Add new category_item
     var item = CategoryItemModel.CategoryItem;
@@ -46,7 +46,7 @@ category.post('/add-item', function(req, res, next) {
 });
 
 // Delete category_item
-category.post('/delete-item', function(req, res, next) {
+category.delete('/delete-item', function(req, res, next) {
     
     // Delete category_item
     var item = CategoryItemModel.CategoryItem;
@@ -62,7 +62,7 @@ category.post('/delete-item', function(req, res, next) {
 });
 
 // Delete category
-category.post('/delete', function(req, res, next) {
+category.delete('/delete', function(req, res, next) {
     
     // Delete category
     var category = CategoryModel.Category;
