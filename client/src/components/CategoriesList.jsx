@@ -53,7 +53,6 @@ class CategoriesList extends React.Component {
                         {
 
                             this.state.categories.map((item, index) => (
-                                console.log(item),
                                 <CategoryView active={(index == 0) ? "true" : "false"} key={item._id} category={item} onDelete={this.onDelete} />
                             ))
                         }

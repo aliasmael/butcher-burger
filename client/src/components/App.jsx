@@ -8,8 +8,6 @@ class App extends React.Component {
          <div>
             <h1> Welcome Butcher's burger!!! </h1>
 
-            <a href="login">login</a>
-
             {/* Categories list component  */}
             <CategoriesList />
 
