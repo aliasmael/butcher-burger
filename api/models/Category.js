@@ -2,6 +2,8 @@
 const CategoryRepository = require('./../repositories/CategoryRepository');
 var categoryRepository = CategoryRepository.CategoryRepository;
 
+var ObjectId = require('mongodb').ObjectID;
+
 // Category repository is responsible for acting with database
 var Category = {
 
@@ -30,9 +32,19 @@ var Category = {
         });
     },
 
+    // update category
+    update: function ( callback ) {
+        categoryRepository.updateCategory( this, function (result) {
+            callback(result);
+        });
+    },
+
     // get all categories
-    getAsJson: function () {
-        return { name: this.name, description: this.description, items: this.items };
+    getAsJson: function (withId) {
+        if ( withId ) 
+            return { _id: ObjectId(this._id), name: this.name, description: this.description, items: this.items };
+        else
+            return { name: this.name, description: this.description, items: this.items };            
     },
 
     addItem: function (item) {

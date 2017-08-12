@@ -1,6 +1,8 @@
 import React from 'react';
+import { Button, Grid, Popup } from 'semantic-ui-react';
 import AddItem from './AddItem.jsx';
 import CategoryItem from './CategoryItem.jsx';
+import EditCategory from './EditCategory.jsx';
 
 class CategoryView extends React.Component {
     constructor(props) {
@@ -9,6 +11,7 @@ class CategoryView extends React.Component {
         this.deleteCategory = this.deleteCategory.bind(this);
         this.onItemAdded = this.onItemAdded.bind(this);
         this.onItemDeleted = this.onItemDeleted.bind(this);
+        this.onUpdate = this.onUpdate.bind(this);
         
         // collapse and expand categories
         $('.ui.accordion').accordion();
@@ -46,7 +49,12 @@ class CategoryView extends React.Component {
             console.log('failed to connect');
         });
     }
-  
+
+    // Updating view on item added
+    onUpdate(category) {
+        this.setState( {category: category} );
+    }
+
     render() {
         var that = this;
         return (
@@ -56,7 +64,11 @@ class CategoryView extends React.Component {
                     (this.state.user.role == "admin") ? 
                         <div className="action-buttons">
                             <button className="ui red button right floated" onClick={this.deleteCategory}>Delete</button>
-                            <button type="button" className="ui orange button right floated">Edit</button>
+
+                            {/* Edit category popup  */}
+                            <Popup wide trigger={<Button type="button" className="ui orange button right floated" content='Edit' />} on='click'>
+                                <EditCategory category={this.state.category} onUpdate={this.onUpdate} />
+                            </Popup>
                         </div> 
                         : ''
                 }
