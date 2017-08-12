@@ -39,8 +39,10 @@ class AddItem extends React.Component {
                 url: 'http://localhost:3000/api/category/add-item',
                 data: data
             }).done(function(data) {
-                that.setState({ name: '', description: '', price: '', errors: '' } );
-                that.state.onItemAdded(data.item);
+                if ( !data.error ) {
+                    that.setState({ name: '', description: '', price: '', errors: '' } );
+                    that.state.onItemAdded(data.item);
+                }
             })
             .fail(function(jqXhr) {
                 console.log('failed to connect');
