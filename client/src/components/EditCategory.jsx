@@ -31,7 +31,6 @@ class EditCategory extends React.Component {
                 url: 'http://localhost:3000/api/category/update',
                 data: { category: JSON.stringify(data) }
             }).done(function(data) {
-                console.log("AAA")
                 that.state.onUpdate(that.state.category);
             })
             .fail(function(jqXhr) {
@@ -72,22 +71,7 @@ class EditCategory extends React.Component {
                     </Form.Field>
                     <Button type='submit' className="ui positive submit button" onClick={this.updateCategory}>Update</Button>
                 </Form>
-
-                {/* <form className="ui form" action="#">
-                    <div className="fields">
-                        <div className={ ( typeof this.state.errors.name !== 'undefined' ) ? "field error" : "field" }>
-                            <input placeholder="English Name *" type="text" name="category-name" value={this.state.name} onChange={this.handleNameChange} required />
-                            <div className={ ( typeof this.state.errors.name !== 'undefined' ) ? "ui pointing red basic label" : "hidden" } > { this.state.errors.name } </div>
-                        </div>
-                        <div className="field">
-                            <textarea placeholder="English Description" type="text" value={this.state.description} onChange={this.handleDescriptionChange} rows="1" />
-                        </div>
-                        <br />
-                        <div className="field">
-                            <div className="ui positive submit button" type="submit" onClick={this.addNewCategory} >Create Category</div>
-                        </div>
-                    </div>
-                </form> */}
+                
             </div>
         );
     }
