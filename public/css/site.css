@@ -24,7 +24,7 @@ body { background-color: #ecf0f5; }
 .ui.styled.accordion .category-item .title { background-color: #c8e9f3; height: 50px; border: 1px solid #9ebac2;}
 .ui.styled.accordion .category-item .title:hover { background-color: #c8e9f3; height: 50px; }
 
-.action-buttons { margin-top: -25px;}
+ .action-buttons { position: absolute; right: 35px; margin-top: 7px; }
 
 .category-item .price { margin-left: 5px; }
 

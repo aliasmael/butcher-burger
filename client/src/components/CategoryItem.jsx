@@ -29,20 +29,20 @@ class CategoryItem extends React.Component {
     render() {
         return (
             <div className="category-item">
+                {/* Show actions button (For Admins Only)  */}
+                {
+                    (this.state.user.role == "admin") ? 
+                        <div className="action-buttons">
+                            <button className="ui red button right floated" onClick={this.deleteItem}>Delete</button>
+                            <button className="ui orange button right floated">Edit</button>
+                        </div>
+                        : ''
+                }
+
                 <div className= "title">
                     <i className="align justify icon"></i>
                     {this.state.item.name}
                     <span className="price">( {this.state.item.price} )</span>
-
-                    {/* Show actions button (For Admins Only)  */}
-                    {
-                        (this.state.user.role == "admin") ? 
-                            <div className="action-buttons">
-                                <button className="ui red button right floated" onClick={this.deleteItem}>Delete</button>
-                                <button className="ui orange button right floated">Edit</button>
-                            </div>
-                            : ''
-                    }
                 </div>
                 <div className= "content">
                     {this.state.item.description}
