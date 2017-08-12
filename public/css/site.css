@@ -32,3 +32,27 @@ body { background-color: #ecf0f5; }
 .no-category.hidden { height: 100px; display: none; }
 
 .title { height: 50px }
+
+.login-container {
+  margin: 0 auto;
+  text-align: center;
+  width: 700px;
+}
+
+.card-heading {
+  padding: 16px;
+}
+
+.field-line, .button-line {
+  padding: 16px;
+}
+
+.error-message {
+  padding: 0 16px;
+  color: tomato;
+}
+
+.success-message {
+  padding: 0 16px;
+  color: green;
+}
