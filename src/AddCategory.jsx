@@ -4,7 +4,7 @@ class AddCategory extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { name: '', description: '' };
+        this.state = { name: '', description: '', onAdd: props.onAdd };
         this.addNewCategory = this.addNewCategory.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
@@ -30,6 +30,7 @@ class AddCategory extends React.Component {
                 data: data
             }).done(function(data) {
                 that.setState({ name: '', description: '' } );
+                that.state.onAdd(data.category);
             })
             .fail(function(jqXhr) {
                 console.log('failed to connect');

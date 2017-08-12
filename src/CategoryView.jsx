@@ -5,27 +5,39 @@ import CategoryItem from './CategoryItem.jsx';
 class CategoryView extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {isActive: props.active, category: props.category};
+        this.state = {isActive: props.active, category: props.category, onDelete: props.onDelete};
         this.deleteCategory = this.deleteCategory.bind(this);
+        this.onItemAdded = this.onItemAdded.bind(this);
+        this.onItemDeleted = this.onItemDeleted.bind(this);
     }
 
-    addNewItem (item) {
-        var newCategoryData = this.state.category.items.push(category);
+    // Updating view on item added
+    onItemAdded(item) {
+        var newCategoryData = this.state.category;
+        newCategoryData.items.push(item);
         this.setState( {category: newCategoryData} );
     }
 
-    deleteCategory (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    // Updating view on item deleted
+    onItemDeleted(itemId) {
+        var items = this.state.category.items.filter( function(item){
+            return (itemId != item._id)
+        });
+        var newData = this.state.category;
+        newData.items = items;
+        this.setState( {category: newData} );
+    }
 
-        var data = { categoryId: this.state.category.id }
+    deleteCategory (e) {
+        var that = this;
+        var data = { categoryId: this.state.category._id }
         
         $.ajax({
             type: 'POST',
             url: 'http://localhost:3000/api/category/delete',
             data: data
         }).done(function(data) {
-            console.log('deleted');                
+            that.state.onDelete(that.state.category._id);
         })
         .fail(function(jqXhr) {
             console.log('failed to connect');
@@ -33,6 +45,7 @@ class CategoryView extends React.Component {
     }
   
     render() {
+        var that = this;
         return (
             <div className="category-view">
                 <div className= {this.state.isActive == "true" ?  "active title" : "title"}>
@@ -40,7 +53,7 @@ class CategoryView extends React.Component {
                     {this.state.category.name}
                     <div className="action-buttons">
                         <button className="ui red button right floated" onClick={this.deleteCategory}>Delete</button>
-                        <button className="ui orange button right floated">Edit</button>
+                        <button type="button" className="ui orange button right floated">Edit</button>
                     </div>
                 </div>
                 <div className={this.state.isActive == "true" ?  "active content" : "content"}>
@@ -64,12 +77,12 @@ class CategoryView extends React.Component {
                             <div className="one wide column">Items</div>
 
                             {/* Add new category_item  */}
-                            <AddItem categoryId={this.state.category.id} />
+                            <AddItem categoryId={this.state.category._id} onItemAdded={this.onItemAdded}/>
 
                             {/* View category_items  */}
                             {
                                 this.state.category.items.map((item, index) => (
-                                    <CategoryItem key={item.id} item={item} addNewItem={this.addNewItem} />
+                                    <CategoryItem key={item._id} item={item} onItemDeleted={this.onItemDeleted} />
                                 ))
                             }
 
