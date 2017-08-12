@@ -56,3 +56,5 @@ body { background-color: #ecf0f5; }
   padding: 0 16px;
   color: green;
 }
+
+.hidden { display: none; }

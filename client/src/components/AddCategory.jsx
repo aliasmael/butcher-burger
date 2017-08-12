@@ -4,7 +4,7 @@ class AddCategory extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { name: '', description: '', onAdd: props.onAdd };
+        this.state = { name: '', description: '', onAdd: props.onAdd, errors: '' };
         this.addNewCategory = this.addNewCategory.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
@@ -14,6 +14,7 @@ class AddCategory extends React.Component {
         if ( this.state.name.trim() != '' )
             return true;
 
+        this.setState( { errors: { name: "required" } } );
         return false;
     }
 
@@ -29,7 +30,7 @@ class AddCategory extends React.Component {
                 url: 'http://localhost:3000/api/category/add',
                 data: data
             }).done(function(data) {
-                that.setState({ name: '', description: '' } );
+                that.setState({ name: '', description: '', errors: '' } );
                 that.state.onAdd(data.category);
             })
             .fail(function(jqXhr) {
@@ -55,8 +56,9 @@ class AddCategory extends React.Component {
                 <h4> Add Category </h4>
                 <form className="ui form" action="#">
                     <div className="eight fields">
-                        <div className="field">
+                        <div className={ ( typeof this.state.errors.name !== 'undefined' ) ? "field error" : "field" }>
                             <input placeholder="English Name *" type="text" name="category-name" value={this.state.name} onChange={this.handleNameChange} required />
+                            <div className={ ( typeof this.state.errors.name !== 'undefined' ) ? "ui pointing red basic label" : "hidden" } > { this.state.errors.name } </div>
                         </div>
                         <div className="field">
                             <textarea placeholder="English Description" type="text" value={this.state.description} onChange={this.handleDescriptionChange} rows="1" />
