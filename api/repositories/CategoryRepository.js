@@ -87,6 +87,12 @@ var CategoryRepository = {
             that.getCategory( categoryId, function(result) {
                 var category = result.category;
                 
+                // Check category object has data
+                if ( !category ) {
+                    callback( { error: true, message: 'Could not find item category.' } );
+                    return;
+                }
+
                 // add category data
                 var newvalues = clone(category);
                 newvalues.items.push(item);
@@ -120,6 +126,12 @@ var CategoryRepository = {
             // get category by id
             that.getCategory( categoryId, function(result) {
                 var category = result.category;
+
+                // Check category object has data
+                if ( !category ) {
+                    callback( { error: true, message: 'Could not find item category.' } );
+                    return;
+                }
                 
                 // add category data
                 var newvalues = clone(category);
