@@ -2,7 +2,17 @@
 
 React app based with SemanticUI
 
+## Prerequisites
+ - Node.js
+ - MongoDB
+
 ## Installation
+
+Install packages
+```
+cd butcher-burger
+npm install
+```
 
 Create mongoDB and category collection
 ```
@@ -21,7 +31,7 @@ Server is running at http://localhost:3000/
 
 Start react
 ```
-cd butcher-burger/
+cd butcher-burger
 node start
 
 Project is running at http://localhost:8080/
