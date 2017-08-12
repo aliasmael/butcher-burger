@@ -22,7 +22,8 @@ class CategoryItem extends React.Component {
             url: 'http://localhost:3000/api/category/delete-item',
             data: data
         }).done(function(data) {
-            that.state.onItemDeleted(that.state.item._id);
+            if ( !data.error )
+                that.state.onItemDeleted(that.state.item._id);
         })
         .fail(function(jqXhr) {
             console.log('failed to connect');
