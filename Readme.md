@@ -16,12 +16,12 @@ npm install
 
 Create mongoDB and category collection
 ```
-cd butcher-burger/api/database
+cd butcher-burger/api/database/migrations
 node createDb.js
-node categoryCollection.js
+node createCategoryCollection.js
 ```
 
-Start node server
+Start node API
 ```
 cd butcher-burger/api
 node server.js
@@ -29,7 +29,7 @@ node server.js
 Server is running at http://localhost:3000/
 ```
 
-Start react
+Start node FrontEnd
 ```
 cd butcher-burger
 node start
