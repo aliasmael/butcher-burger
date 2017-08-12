@@ -31,6 +31,7 @@ class EditCategory extends React.Component {
                 url: 'http://localhost:3000/api/category/update',
                 data: { category: JSON.stringify(data) }
             }).done(function(data) {
+                that.setState( { errors: { name: undefined } } );
                 that.state.onUpdate(that.state.category);
             })
             .fail(function(jqXhr) {
@@ -71,7 +72,7 @@ class EditCategory extends React.Component {
                     </Form.Field>
                     <Button type='submit' className="ui positive submit button" onClick={this.updateCategory}>Update</Button>
                 </Form>
-                
+
             </div>
         );
     }
