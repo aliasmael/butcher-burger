@@ -35,7 +35,7 @@ class AddItem extends React.Component {
             var data = { itemName: this.state.name, itemDescription: this.state.description, itemPrice: this.state.price, categoryId: this.state.categoryId }
             
             $.ajax({
-                type: 'POST',
+                type: 'PUT',
                 url: 'http://localhost:3000/api/category/add-item',
                 data: data
             }).done(function(data) {

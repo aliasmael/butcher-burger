@@ -39,7 +39,7 @@ class CategoryView extends React.Component {
         var data = { categoryId: this.state.category._id }
         
         $.ajax({
-            type: 'POST',
+            type: 'DELETE',
             url: 'http://localhost:3000/api/category/delete',
             data: data
         }).done(function(data) {

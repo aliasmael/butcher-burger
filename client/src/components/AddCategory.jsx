@@ -26,7 +26,7 @@ class AddCategory extends React.Component {
             var data = { categoryName: this.state.name, categoryDescription: this.state.description }
             
             $.ajax({
-                type: 'POST',
+                type: 'PUT',
                 url: 'http://localhost:3000/api/category/add',
                 data: data
             }).done(function(data) {
