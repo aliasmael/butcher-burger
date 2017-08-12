@@ -3,8 +3,11 @@ import React from 'react';
 class CategoryItem extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {item: props.item, onItemDeleted: props.onItemDeleted};
+        this.state = {item: props.item, onItemDeleted: props.onItemDeleted, user: props.user};
         this.deleteItem = this.deleteItem.bind(this);
+
+        // collapse and expand items
+        $('.ui.accordion').accordion();
     }
 
     deleteItem (e) {
@@ -31,10 +34,15 @@ class CategoryItem extends React.Component {
                     {this.state.item.name}
                     <span className="price">( {this.state.item.price} )</span>
 
-                    <div className="action-buttons">
-                        <button className="ui red button right floated" onClick={this.deleteItem}>Delete</button>
-                        <button className="ui orange button right floated">Edit</button>
-                    </div>
+                    {/* Show actions button (For Admins Only)  */}
+                    {
+                        (this.state.user.role == "admin") ? 
+                            <div className="action-buttons">
+                                <button className="ui red button right floated" onClick={this.deleteItem}>Delete</button>
+                                <button className="ui orange button right floated">Edit</button>
+                            </div>
+                            : ''
+                    }
                 </div>
                 <div className= "content">
                     {this.state.item.description}

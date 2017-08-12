@@ -51,7 +51,7 @@ class LoginPage extends React.Component {
 
     var username = this.state.user.username;
     var password = this.state.user.password;
-
+    
 
     //validate form data
     var valid = this.validForm(username, password);
@@ -61,9 +61,11 @@ class LoginPage extends React.Component {
     if ( valid ) {
       // static login and redirect to menues page
       if ( username == "admin" && password == "admin" ) {
-          browserHistory.push('/categories');
-      } else if ( username == "admin" && password == "admin" ) {
-          browserHistory.push('/categories');        
+          var user = { username: "admin", role: "admin" }
+          browserHistory.push( { pathname: '/categories', state: { user: user } } );
+      } else if ( username == "user" && password == "user" ) {
+          var user = { username: "user", role: "user" }
+          browserHistory.push( { pathname: '/categories', state: { user: user } } );
       } else {
         this.setState( { 
           errors: { 

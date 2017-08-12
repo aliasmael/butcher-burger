@@ -5,10 +5,13 @@ import CategoryItem from './CategoryItem.jsx';
 class CategoryView extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {isActive: props.active, category: props.category, onDelete: props.onDelete};
+        this.state = {isActive: props.active, category: props.category, onDelete: props.onDelete, user: props.user};
         this.deleteCategory = this.deleteCategory.bind(this);
         this.onItemAdded = this.onItemAdded.bind(this);
         this.onItemDeleted = this.onItemDeleted.bind(this);
+        
+        // collapse and expand categories
+        $('.ui.accordion').accordion();
     }
 
     // Updating view on item added
@@ -51,10 +54,16 @@ class CategoryView extends React.Component {
                 <div className= {this.state.isActive == "true" ?  "active title" : "title"}>
                     <i className="align justify icon"></i>
                     {this.state.category.name}
-                    <div className="action-buttons">
-                        <button className="ui red button right floated" onClick={this.deleteCategory}>Delete</button>
-                        <button type="button" className="ui orange button right floated">Edit</button>
-                    </div>
+
+                    {/* Show actions button (For Admins Only)  */}
+                    {
+                        (this.state.user.role == "admin") ? 
+                            <div className="action-buttons">
+                                <button className="ui red button right floated" onClick={this.deleteCategory}>Delete</button>
+                                <button type="button" className="ui orange button right floated">Edit</button>
+                            </div> 
+                            : ''
+                    }
                 </div>
                 <div className={this.state.isActive == "true" ?  "active content" : "content"}>
 
@@ -76,13 +85,15 @@ class CategoryView extends React.Component {
                         <div className="eight column">
                             <div className="one wide column">Items</div>
 
-                            {/* Add new category_item  */}
-                            <AddItem categoryId={this.state.category._id} onItemAdded={this.onItemAdded}/>
+                            {/* Add new category_item (Admin Only) */}
+                            {
+                                (this.state.user.role == "admin") ? <AddItem categoryId={this.state.category._id} onItemAdded={this.onItemAdded}/> : ''
+                            }
 
                             {/* View category_items  */}
                             {
                                 this.state.category.items.map((item, index) => (
-                                    <CategoryItem key={item._id} item={item} onItemDeleted={this.onItemDeleted} />
+                                    <CategoryItem key={item._id} item={item} onItemDeleted={this.onItemDeleted} user={that.state.user} />
                                 ))
                             }
 
