@@ -1,10 +1,13 @@
 import React from 'react';
+import { Button, Grid, Popup } from 'semantic-ui-react';
+import EditItem from './EditItem.jsx';
 
 class CategoryItem extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {item: props.item, onItemDeleted: props.onItemDeleted, user: props.user};
+        this.state = {category: props.category, item: props.item, onItemDeleted: props.onItemDeleted, user: props.user};
         this.deleteItem = this.deleteItem.bind(this);
+        this.onUpdate = this.onUpdate.bind(this);
 
         // collapse and expand items
         $('.ui.accordion').accordion();
@@ -26,6 +29,11 @@ class CategoryItem extends React.Component {
         });
     }
 
+    // Updating view on item updated
+    onUpdate(category) {
+        this.setState( {category: category} );
+    }
+
     render() {
         return (
             <div className="category-item">
@@ -34,7 +42,10 @@ class CategoryItem extends React.Component {
                     (this.state.user.role == "admin") ? 
                         <div className="action-buttons">
                             <button className="ui red button right floated" onClick={this.deleteItem}>Delete</button>
-                            <button className="ui orange button right floated">Edit</button>
+                            {/* Edit category popup  */}
+                            <Popup wide trigger={<Button type="button" className="ui orange button right floated" content='Edit' />} on='click'>
+                                <EditItem category={this.state.category} item={this.state.item} onUpdate={this.onUpdate} />
+                            </Popup>
                         </div>
                         : ''
                 }
