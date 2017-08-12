@@ -37,11 +37,18 @@ node start
 Project is running at http://localhost:8080/
 ```
 
-## Login
+## Login & Roles
  - Admin:
     - username: admin
     - password: admin
+    - Role: 
+        - Can View the menu
 
 - User:
     - username: user
     - password: user
+    - Role: 
+        - Can View the menu.
+        - Can add new Categories/Items.
+        - Can Edit Categories or Item's names and their prices.
+        - Can delete Categories/Items.
