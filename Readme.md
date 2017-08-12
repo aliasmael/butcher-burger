@@ -36,3 +36,12 @@ node start
 
 Project is running at http://localhost:8080/
 ```
+
+## Login
+ - Admin:
+    - username: admin
+    - password: admin
+
+- User:
+    - username: user
+    - password: user
