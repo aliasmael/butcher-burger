@@ -64,11 +64,29 @@ category.post('/delete-item', function(req, res, next) {
 // Delete category
 category.post('/delete', function(req, res, next) {
     
-    // Add new category
+    // Delete category
     var category = CategoryModel.Category;
     category._id = req.body.categoryId;
 
     category.delete( function (result) {
+        res.json( result );
+    }) 
+
+});
+
+// Update category
+category.post('/update', function(req, res, next) {
+    
+    var updatedCategory = JSON.parse(req.body.category);
+
+    // Update category
+    var category = CategoryModel.Category;
+    category._id = updatedCategory._id;
+    category.name = updatedCategory.name;
+    category.description = updatedCategory.description;
+    category.items = updatedCategory.items;
+
+    category.update( function (result) {
         res.json( result );
     }) 
 

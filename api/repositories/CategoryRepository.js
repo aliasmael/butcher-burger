@@ -165,6 +165,37 @@ var CategoryRepository = {
             });
         });
 
+    },
+
+    // delete category
+    updateCategory: function (category, callback) {
+
+        // get object of this to be used inside next function
+        var that = this;
+
+        MongoClient.connect(url, function(err, db) {
+            if (err) 
+                callback( { error: true, message: err } );
+
+            // get category by id
+            that.getCategory( category._id, function(result) {
+                var oldValues = result.category;
+                var newvalues = category.getAsJson(true);
+
+                // update category
+                db.collection("categories").updateOne(oldValues, newvalues, function(err, res) {
+                    if (err)
+                        callback( { error: true, message: err } );
+                    
+                    // close connection with DB
+                    db.close();
+                    
+                    // return result to callback
+                    callback( { error: false, category:category } );
+                });
+            });
+        });
+
     }
 }
 
