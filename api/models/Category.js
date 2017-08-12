@@ -5,7 +5,6 @@ var categoryRepository = CategoryRepository.CategoryRepository;
 // Category repository is responsible for acting with database
 var Category = {
 
-    id: '',
     name: '',
     description: '',
     items: [],
@@ -26,18 +25,14 @@ var Category = {
 
     // delete category
     delete: function ( callback ) {
-        categoryRepository.deleteCategory( this.id, function (result) {
+        categoryRepository.deleteCategory( this._id, function (result) {
             callback(result);
         });
     },
 
     // get all categories
     getAsJson: function () {
-        return { id: this.id, name: this.name, description: this.description, items: this.items };
-    },
-
-    guid: function () {
-        return (new Date()).getTime();
+        return { name: this.name, description: this.description, items: this.items };
     },
 
     addItem: function (item) {

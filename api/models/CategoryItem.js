@@ -5,7 +5,7 @@ var categoryRepository = CategoryRepository.CategoryRepository;
 // Category repository is responsible for acting with database
 var CategoryItem = {
 
-    id: '',
+    _id: '',
     name: '',
     description: '',
     price: '',
@@ -28,9 +28,9 @@ var CategoryItem = {
 
     // get parse item to json
     getAsJson: function () {
-        return [{ id: this.id, name: this.name, description: this.description, price: this.price }]
-    },
-
+        return { _id: this._id, name: this.name, description: this.description, price: this.price };
+    }
+    ,
     // generate uniqe guid
     guid: function () {
         return (new Date()).getTime();
