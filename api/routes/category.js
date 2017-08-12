@@ -50,9 +50,10 @@ category.post('/delete-item', function(req, res, next) {
     
     // Delete category_item
     var item = CategoryItemModel.CategoryItem;
-    item.name = req.body.itemName;
-    item.description = req.body.itemDescription;
-    item.price = req.body.itemPrice;
+    item._id = req.body._id;
+    item.name = req.body.name;
+    item.description = req.body.description;
+    item.price = req.body.price;
     item.categoryId = req.body.categoryId;
     item.delete( function (result) {
         res.json( result );
