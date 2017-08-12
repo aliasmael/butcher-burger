@@ -1,5 +1,5 @@
 import React from 'react';
-import CategoriesList from './CategoriesList.jsx';
+import CategoriesList from './components/CategoriesList.jsx';
 
 class App extends React.Component {
    render() {

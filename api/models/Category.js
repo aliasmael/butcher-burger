@@ -1,5 +1,5 @@
 // use CategoryRepository for accessing database
-const CategoryRepository = require('./../database-repository/CategoryRepository');
+const CategoryRepository = require('./../repositories/CategoryRepository');
 var categoryRepository = CategoryRepository.CategoryRepository;
 
 // Category repository is responsible for acting with database
