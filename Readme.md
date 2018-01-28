@@ -51,3 +51,7 @@ Project is running at http://localhost:8080/
     - password: user
     - Role: 
         - Can View the menu
+
+# Screenshots
+
+<img src="./assets/screenshots/home.png" alt="Home"/>
